@@ -14,7 +14,9 @@ public class cubeMovement : MonoBehaviour
     AudioSource playerAudio;
     public float m_Thrust = 0.01f;
     public int playerWalkStatus = 0;
-    // Start is called before the first frame update
+    int audiostatus = 0;
+
+    // Start is called before the first framwwwe update
     void Start()
     {
         runing = 2.8f;
@@ -28,31 +30,38 @@ public class cubeMovement : MonoBehaviour
         //Player Movement
         if (Input.GetKey(KeyCode.W)) {
 
+          
             if (a == 1) {
 
                 gameObject.transform.Translate(Vector3.forward * 20f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 2;
+                RunAudioFunc();
             }
             else
             {
                 gameObject.transform.Translate(Vector3.forward * 12f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 1;
+                WalkAudioFunc();
             }
    
         }
-      
-        if (Input.GetKey(KeyCode.S))
+
+
+
+            if (Input.GetKey(KeyCode.S))
         {
 
             if (a == 1)
             {
                 gameObject.transform.Translate(Vector3.back * 20f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 2;
+                RunAudioFunc();
             }
             else
             {
                 gameObject.transform.Translate(Vector3.back * 12f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 1;
+                WalkAudioFunc();
             }
 
         }
@@ -64,11 +73,13 @@ public class cubeMovement : MonoBehaviour
             {
                 gameObject.transform.Translate(Vector3.right * 20f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 2;
+                RunAudioFunc();
             }
             else
             {
                 gameObject.transform.Translate(Vector3.right * 12f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 1;
+                WalkAudioFunc();
             }
 
         }
@@ -80,20 +91,33 @@ public class cubeMovement : MonoBehaviour
             {
                 gameObject.transform.Translate(Vector3.left * 20f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 2;
+                RunAudioFunc();
             }
             else
             {
                 gameObject.transform.Translate(Vector3.left * 12f * Time.deltaTime, Space.Self);
                 playerWalkStatus = 1;
+                WalkAudioFunc();
             }
 
         }
-     
+
+        //on Mouse Up by pressing W
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+        {
+            PlayerWalkAudio.SetActive(false);
+            PlayerRunAudio.SetActive(false);
+            audiostatus = 0;
+        }
+        //-------------------------------
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
 
             a = 1;
-            
+            audiostatus = 1;
+
+
         }
         else {
 
@@ -101,12 +125,31 @@ public class cubeMovement : MonoBehaviour
           
         }
 
-       if(playerWalkStatus == 1)
+     /*  if(playerWalkStatus == 1)
         {
             PlayerWalkAudio.SetActive(true);
             playerWalkStatus = 3;
-        }
+        }*/
        
     }
 
+    void WalkAudioFunc()
+    {
+        if (audiostatus == 0)
+        {
+            PlayerRunAudio.SetActive(false);
+            PlayerWalkAudio.SetActive(true);
+            audiostatus = 1;
+        }
+    }
+
+    void RunAudioFunc()
+    {
+        if (audiostatus == 1)
+        {
+            PlayerWalkAudio.SetActive(false);
+            PlayerRunAudio.SetActive(true);
+            audiostatus = 0;
+        }
+    }
 }
