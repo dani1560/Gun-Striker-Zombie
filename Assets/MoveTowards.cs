@@ -7,26 +7,21 @@ public class MoveTowards : MonoBehaviour
     GameObject player;
     [SerializeField]
     float distance;
-    public static int a;
-    public static int body;
+    public int a;
+    public int body_zombbie = 0;
+    public int head_zombie = 0;
     Animator anim;
-    public GameObject headZombie;
-    public GameObject bodyZombie;
-   
-
+    
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         anim = gameObject.GetComponent<Animator>();
-        //zombieBlood = this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         distance = Vector3.Distance(player.transform.position, gameObject.transform.position);
 
         if (a == 0)
@@ -52,30 +47,10 @@ public class MoveTowards : MonoBehaviour
                 gameObject.transform.Translate(Vector3.forward * 0.4f * Time.deltaTime, Space.Self);
 
             }
-        }
-        else if (a == 1)
-        {
-            bodyZombie.SetActive(true);
-            anim.StopPlayback();
-            anim.Play("Z_FallingForward");
-            a = 3;
-            body = 11;
+    
 
         }
-        else if (a == 2)
-        {
-            headZombie.SetActive(true);
-            anim.StopPlayback();
-            anim.Play("Z_FallingBack");
-            a = 3;
-            body = 11;
-        }
-       
+    
     }
 
-  
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.collider.gameObject.name);
-    }
 }

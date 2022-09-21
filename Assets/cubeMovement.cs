@@ -100,6 +100,7 @@ public class cubeMovement : MonoBehaviour
                 WalkAudioFunc();
             }
 
+
         }
 
         //on Mouse Up by pressing W
