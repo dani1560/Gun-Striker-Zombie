@@ -17,11 +17,14 @@ public class MoveTowards : MonoBehaviour
     {
         player = GameObject.Find("Player");
         anim = gameObject.GetComponent<Animator>();
+        //zombieBlood = this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         distance = Vector3.Distance(player.transform.position, gameObject.transform.position);
 
         if (a == 0)
@@ -50,7 +53,41 @@ public class MoveTowards : MonoBehaviour
     
 
         }
-    
+        /*if (a == 1)
+         {
+             bodyZombie.SetActive(true);
+             anim.StopPlayback();
+             anim.Play("Z_FallingForward");
+             a = 3;
+             body = 11;
+
+         }
+         else if (a == 2)
+         {
+             headZombie.SetActive(true);
+             anim.StopPlayback();
+             anim.Play("Z_FallingBack");
+             a = 3;
+             body = 11;
+         }
+        */
     }
 
+  
+    private void OnCollisionEnter(Collision collision)
+    {
+        /*if (collision.gameObject.name.Contains("bullet"))
+        {
+            *//*if (BulletCollision.zom.name == gameObject.name)
+            {
+                a = 1;
+
+                Debug.Log(gameObject.name + "Zombie Destroy - " + anim);
+            }*//*
+            //BulletCollision.zom.GetComponent<Animator>().Play("Z_FallingBack");
+            //Destroy(BulletCollision.zom);
+
+        }*/
+
+    }
 }
